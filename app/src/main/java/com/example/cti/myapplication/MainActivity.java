@@ -21,4 +21,8 @@ public class MainActivity extends AppCompatActivity {
         String texto = "";
         txtNome.setText(texto);
     }
+
+    public void addNome(View view){
+
+    }
 }
