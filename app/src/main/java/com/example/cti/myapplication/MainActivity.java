@@ -2,10 +2,12 @@ package com.example.cti.myapplication;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -50,6 +52,11 @@ public class MainActivity extends AppCompatActivity {
         }catch (Exception ex){
             Log.d("Lista",ex.getMessage());
         }
+    }
 
+    public void limpaCampo(View view){
+        String limpa = "";
+        txtNome.setText(limpa);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
     }
 }

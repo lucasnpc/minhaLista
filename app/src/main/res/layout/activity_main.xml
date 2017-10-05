@@ -28,7 +28,8 @@
         android:gravity="bottom|center"
         android:background="@android:color/black"
         android:textColor="@android:color/white"
-        android:textColorLink="@android:color/white" />
+        android:textColorLink="@android:color/white"
+        android:onClick="limpaCampo" />
 
     <Button
         android:text="ADD"
@@ -50,6 +51,7 @@
         android:layout_height="350dp"
         android:layout_alignParentBottom="true"
         android:background="@android:color/holo_blue_light"
-        android:drawSelectorOnTop="false"
-        android:id="@+id/Lista"></ListView>
+        android:id="@+id/Lista">
+
+    </ListView>
 </RelativeLayout>
