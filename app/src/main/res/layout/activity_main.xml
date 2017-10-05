@@ -21,24 +21,14 @@
         android:fontFamily="sans-serif"
         android:textSize="15dp"
         android:textAlignment="center"
-        android:onClick="limpaNome"
         android:focusable="false"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:gravity="bottom|center"
         android:background="@android:color/black"
-        tools:text="Digite seu nome..."
-        android:textColor="@android:color/white" />
-
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/editText"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="25dp"
-        android:background="@android:color/holo_blue_light" />
+        android:textColor="@android:color/white"
+        android:textColorLink="@android:color/white" />
 
     <Button
         android:text="ADD"
@@ -52,5 +42,14 @@
         android:layout_marginRight="14dp"
         android:layout_marginEnd="14dp"
         android:layout_marginTop="51dp"
-        android:layout_width="45dp" />
+        android:layout_width="45dp"
+        android:onClick="addNome" />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/holo_blue_light"
+        android:drawSelectorOnTop="false"
+        android:id="@+id/Lista"></ListView>
 </RelativeLayout>
