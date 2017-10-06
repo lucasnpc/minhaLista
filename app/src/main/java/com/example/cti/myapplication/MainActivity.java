@@ -1,6 +1,7 @@
 package com.example.cti.myapplication;
 
 import android.app.Dialog;
+import android.content.ContentValues;
 import android.content.Context;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -16,10 +17,13 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.database.sqlite.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import static java.security.AccessController.getContext;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
     ArrayAdapter<String> adapter;
     ListView listItems;
     ArrayList<String> palavras;
+    public String table_nome = "Nomes";
+    public String nome_coluna = "nome";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,17 +61,16 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void addNome(View view){
-        try {
-            Button b = (Button) view;
-            String nome = txtNome.getText().toString();
+    public void addNome(View view) {
+        Button b = (Button) view;
+        String nome = txtNome.getText().toString();
+        FeedReaderDbHelper mDbHelper = new FeedReaderDbHelper(this);
+        SQLiteDatabase db = mDbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(bancodados.FeedEntry.column_nome, nome);
 
+        long newRowId = db.insert(bancodados.FeedEntry.table_nome, null, values);
 
-            palavras.add(nome);
-            adapter.notifyDataSetChanged();
-        }catch (Exception ex){
-            Log.d("Lista",ex.getMessage());
-        }
     }
 
     public void limpaCampo(View view){
