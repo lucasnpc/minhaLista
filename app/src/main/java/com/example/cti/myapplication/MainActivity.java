@@ -31,8 +31,6 @@ public class MainActivity extends AppCompatActivity {
     ArrayAdapter<String> adapter;
     ListView listItems;
     ArrayList<String> palavras;
-    public String table_nome = "Nomes";
-    public String nome_coluna = "nome";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,21 +59,21 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void addNome(View view) {
-        Button b = (Button) view;
-        String nome = txtNome.getText().toString();
-        FeedReaderDbHelper mDbHelper = new FeedReaderDbHelper(this);
-        SQLiteDatabase db = mDbHelper.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put(bancodados.FeedEntry.column_nome, nome);
+    public void insereRegistro(View v){
+        Button b = (Button)findViewById(R.id.bAdd);
 
-        long newRowId = db.insert(bancodados.FeedEntry.table_nome, null, values);
+        b.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BancoControler crud = new BancoControler(getBaseContext());
+                EditText nome = (EditText) findViewById(R.id.editText2);
+                String nomeString = nome.getText().toString();
+                String resultado;
 
-    }
+                resultado = crud.insereDado(nomeString);
 
-    public void limpaCampo(View view){
-        String limpa = "";
-        txtNome.setText(limpa);
-        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+                Toast.makeText(getApplicationContext(), resultado, Toast.LENGTH_LONG).show();
+            }
+        });
     }
 }
