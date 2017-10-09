@@ -3,6 +3,7 @@ package com.example.cti.myapplication;
 import android.app.Dialog;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -27,36 +28,12 @@ import static java.security.AccessController.getContext;
 
 public class MainActivity extends AppCompatActivity {
 
-    private EditText txtNome;
-    ArrayAdapter<String> adapter;
-    ListView listItems;
-    ArrayList<String> palavras;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        txtNome = (EditText) findViewById(R.id.editText2);
-        listItems = (ListView) findViewById(R.id.Lista);
-
-        String[] items = {"Louco","Doido","Maluco"};
-
-        palavras=new ArrayList<>(Arrays.asList(items));
-        adapter=new ArrayAdapter<String>(this,R.layout.list_item,R.id.txtitem,palavras);
-        listItems.setAdapter(adapter);
-
-        listItems.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                palavras.remove(palavras.get(position));
-                adapter=new ArrayAdapter<String>(MainActivity.this,R.layout.list_item,R.id.txtitem,palavras);
-                adapter.notifyDataSetChanged();
-                listItems.setAdapter(adapter);
-
-                return false;
-            }
-        });
-
     }
 
     public void insereRegistro(View v){
@@ -75,5 +52,11 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), resultado, Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    public void ShowLista(View v){
+        Intent intent = new Intent(this,lista.class);
+
+        startActivity(intent);
     }
 }
