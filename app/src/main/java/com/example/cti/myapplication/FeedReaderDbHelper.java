@@ -13,7 +13,7 @@ public class FeedReaderDbHelper extends SQLiteOpenHelper {
     private static final String SQL_CREATE_ENTRIES =
             "CREATE TABLE " +table_nome + " (" +
             ID + " integer primary key autoincrement,"+
-            column_nome + " text)";
+            column_nome + " text not null)";
 
     private static final String SQL_DELETE_POSTS =
             "DROP TABLE IF EXISTS " + table_nome;

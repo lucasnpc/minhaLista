@@ -2,6 +2,7 @@ package com.example.cti.myapplication;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
@@ -32,5 +33,19 @@ public class BancoControler {
             return  "Erro ao inserir registro.";
         else
             return "Registro inserido com sucesso.";
+    }
+
+    public Cursor carregaDados(){
+        Cursor cursor;
+        String[] campos = {FeedReaderDbHelper.ID,FeedReaderDbHelper.column_nome};
+        db = banco.getReadableDatabase();
+        cursor = db.query(FeedReaderDbHelper.table_nome,campos, null, null, null, null, null, null);
+
+        if(cursor != null) {
+            cursor.moveToFirst();
+        }
+
+        db.close();
+        return cursor;
     }
 }

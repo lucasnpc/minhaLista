@@ -1,11 +1,16 @@
 package com.example.cti.myapplication;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Interpolator;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
+
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,27 +21,26 @@ import java.util.Arrays;
 
 public class lista extends MainActivity {
 
-    private EditText txtNome;
-    ArrayAdapter<String> adapter;
     ListView listItems;
-    ArrayList<String> palavras;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.list_item);
+        setContentView(R.layout.list_view);
+        listItems = (ListView) findViewById(R.id.ListView);
 
-        txtNome = (EditText) findViewById(R.id.editText2);
-        listItems = (ListView) findViewById(R.id.listView);
+        BancoControler crud = new BancoControler(getBaseContext());
+        Cursor cursor = crud.carregaDados();
 
-        String[] items = {"Louco",
-                "Doido",
-                "Maluco"};
+        SimpleCursorAdapter adaptador = new SimpleCursorAdapter(this, R.layout.list_item, cursor,
+                new String[]{FeedReaderDbHelper.ID,
+                        FeedReaderDbHelper.column_nome},
+                new int[]{R.id.id, R.id.txtitem});
+        adaptador.notifyDataSetChanged();
+        listItems.setAdapter(adaptador);
+    }
+}
 
-        palavras=new ArrayList<>(Arrays.asList(items));
-        adapter=new ArrayAdapter<String>(this,R.layout.list_item,R.id.txtitem,palavras);
-        listItems.setAdapter(adapter);
-
+        /*
         listItems.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
@@ -48,5 +52,4 @@ public class lista extends MainActivity {
                 return false;
             }
         });
-    }
-}
+        */
