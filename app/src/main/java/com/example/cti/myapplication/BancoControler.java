@@ -38,7 +38,6 @@ public class BancoControler {
     public Cursor carregaDados(){
         Cursor cursor;
         String[] campos = {FeedReaderDbHelper.ID,FeedReaderDbHelper.column_nome};
-        db = banco.getReadableDatabase();
         cursor = db.query(FeedReaderDbHelper.table_nome,campos, null, null, null, null, null, null);
 
         if(cursor != null) {
