@@ -56,23 +56,10 @@ public class lista extends MainActivity {
                 ArrayAdapter adapter=new ArrayAdapter<String>(lista.this,R.layout.list_item,R.id.txtitem,nomes);
                 adapter.notifyDataSetChanged();
                 listItems.setAdapter(adapter);
-                Toast.makeText(lista.this, "Registro excluído com sucesso.", Toast.LENGTH_LONG).show();
+                Toast.makeText(lista.this, "Registro excluído com sucesso.", Toast.LENGTH_SHORT).show();
                 return false;
             }
         });
     }
 }
 
-        /*
-        listItems.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                palavras.remove(palavras.get(position));
-                adapter=new ArrayAdapter<String>(lista.this,R.layout.list_item,R.id.txtitem,palavras);
-                adapter.notifyDataSetChanged();
-                listItems.setAdapter(adapter);
-
-                return false;
-            }
-        });
-        */

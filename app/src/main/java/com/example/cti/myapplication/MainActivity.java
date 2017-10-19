@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
                 resultado = crud.insereDado(nomeString);
 
-                Toast.makeText(getApplicationContext(), resultado, Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), resultado, Toast.LENGTH_SHORT).show();
             }
         });
     }
