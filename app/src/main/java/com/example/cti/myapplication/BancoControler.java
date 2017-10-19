@@ -5,6 +5,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+import android.widget.ArrayAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Cti on 09/10/2017.
@@ -35,16 +39,27 @@ public class BancoControler {
             return "Registro inserido com sucesso.";
     }
 
-    public Cursor carregaDados(){
+    public List<String> carregaDados(){
+        List<String> nomes = new ArrayList<>();
         Cursor cursor;
-        String[] campos = {FeedReaderDbHelper.ID,FeedReaderDbHelper.column_nome};
+        String[] campos = {FeedReaderDbHelper.column_nome, "_id"};
+        db = banco.getReadableDatabase();
         cursor = db.query(FeedReaderDbHelper.table_nome,campos, null, null, null, null, null, null);
 
         if(cursor != null) {
             cursor.moveToFirst();
-        }
 
-        db.close();
-        return cursor;
+            String nome;
+            while (cursor.moveToNext()) {
+                nome = cursor.getString(cursor.getColumnIndex("nome"));
+                nomes.add(nome);
+            }
+            db.close();
+            return nomes;
+        }
+        else {
+            db.close();
+            return null;
+        }
     }
 }

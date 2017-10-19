@@ -9,11 +9,10 @@ import java.security.AccessControlContext;
 public class FeedReaderDbHelper extends SQLiteOpenHelper {
     public static final String table_nome = "Nomes";
     public static final String column_nome = "nome";
-    public static final String ID = "id";
     private static final String SQL_CREATE_ENTRIES =
             "CREATE TABLE " +table_nome + " (" +
-            ID + " integer primary key autoincrement,"+
-            column_nome + " text not null)";
+                    "_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            column_nome + " text)";
 
     private static final String SQL_DELETE_POSTS =
             "DROP TABLE IF EXISTS " + table_nome;

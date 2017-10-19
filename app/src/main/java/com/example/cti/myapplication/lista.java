@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by Cti on 09/10/2017.
@@ -31,29 +32,20 @@ public class lista extends MainActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.list_view);
-        listItems = (ListView) findViewById(R.id.ListView);
+        setContentView(R.layout.lista);
+        listItems = (ListView) findViewById(R.id.lista2);
         banco = new FeedReaderDbHelper(getBaseContext());
 
-        //BancoControler crud = new BancoControler(getBaseContext());
-        String[] campos = {FeedReaderDbHelper.ID,FeedReaderDbHelper.column_nome};
-        db = banco.getReadableDatabase();
-        Cursor cursor = db.query(FeedReaderDbHelper.table_nome,campos,null,null,null,null,null,null);
+        BancoControler crud = new BancoControler(getBaseContext());
+        List<String> nomes = crud.carregaDados();
 
-        if(cursor != null) {
-            cursor.moveToFirst();
-        }
-
-        if(cursor.getCount() > 0) {
-            dataSource = new SimpleCursorAdapter(getBaseContext(), R.layout.list_view, cursor,
-                    new String[]{FeedReaderDbHelper.ID,
-                            FeedReaderDbHelper.column_nome},
-                    new int[]{R.id.id, R.id.txtitem},0);
-            listItems.setAdapter(dataSource);
+        if (nomes == null) {
+            Toast.makeText(this, "Não Existem Elementos!", Toast.LENGTH_SHORT).show();
         }
         else {
-            Toast.makeText(this,"Nenhum registro encontrado", Toast.LENGTH_LONG).show();
-
+            ArrayAdapter adapter=new ArrayAdapter<String>(lista.this,R.layout.list_item,R.id.txtitem,nomes);
+            adapter.notifyDataSetChanged();
+            listItems.setAdapter(adapter);
         }
     }
 }

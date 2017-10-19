@@ -6,16 +6,9 @@
 
 
     <TextView
-        android:id="@+id/id"
-        android:layout_width="274dp"
-        android:layout_gravity="fill_horizontal"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="10dp"
-        android:text="ID" />
-
-    <TextView
         android:id="@+id/txtitem"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="13pt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
