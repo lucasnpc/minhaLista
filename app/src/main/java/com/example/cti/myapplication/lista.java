@@ -36,8 +36,8 @@ public class lista extends MainActivity {
         listItems = (ListView) findViewById(R.id.lista2);
         banco = new FeedReaderDbHelper(getBaseContext());
 
-        BancoControler crud = new BancoControler(getBaseContext());
-        List<String> nomes = crud.carregaDados();
+        final BancoControler crud = new BancoControler(getBaseContext());
+        final List<String> nomes = crud.carregaDados();
 
         if (nomes == null) {
             Toast.makeText(this, "Não Existem Elementos!", Toast.LENGTH_SHORT).show();
@@ -47,6 +47,19 @@ public class lista extends MainActivity {
             adapter.notifyDataSetChanged();
             listItems.setAdapter(adapter);
         }
+
+        listItems.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                crud.deletaRegistro(position);
+                nomes.remove(nomes.get(position));
+                ArrayAdapter adapter=new ArrayAdapter<String>(lista.this,R.layout.list_item,R.id.txtitem,nomes);
+                adapter.notifyDataSetChanged();
+                listItems.setAdapter(adapter);
+                Toast.makeText(lista.this, "Registro excluído com sucesso.", Toast.LENGTH_LONG).show();
+                return false;
+            }
+        });
     }
 }
 

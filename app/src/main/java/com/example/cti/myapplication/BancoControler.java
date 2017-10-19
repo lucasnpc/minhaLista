@@ -62,4 +62,11 @@ public class BancoControler {
             return null;
         }
     }
+
+    public void deletaRegistro(int id){
+        String where = "_id = _id";
+        db = banco.getReadableDatabase();
+        db.delete(FeedReaderDbHelper.table_nome,where,null);
+        db.close();
+    }
 }
